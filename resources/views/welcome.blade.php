@@ -277,7 +277,7 @@
                 </a>
 
 
-                <a href="#" class="quick-card">
+                 <a href="{{ route('login') }}" class="quick-card">
                     <div class="card-icon">
                         <i class="fas fa-user-graduate"></i>
                     </div>

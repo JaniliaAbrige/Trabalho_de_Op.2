@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Usuario;
+use App\Models\Inscricao;
+use App\Models\Curso;
 
 class Estudante extends Model
 {
@@ -34,7 +36,7 @@ class Estudante extends Model
      */
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
     /**
@@ -42,7 +44,7 @@ class Estudante extends Model
      */
     public function inscricoes()
     {
-        return $this->hasMany(Inscricao::class);
+        return $this->hasMany(Inscricao::class, 'estudante_id');
     }
 
     /**
