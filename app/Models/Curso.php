@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Disciplina;
 
 class Curso extends Model
 {
@@ -92,4 +93,9 @@ class Curso extends Model
             'analisado_por',
         ])->withTimestamps();
     }
+
+    public function disciplinas()
+{
+    return $this->hasMany(Disciplina::class, 'curso_id');
+}
 }

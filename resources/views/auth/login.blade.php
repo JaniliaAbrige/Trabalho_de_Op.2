@@ -8,888 +8,467 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <meta name="csrf-token"
-          content="{{ csrf_token() }}">
-
     <title>Entrar | SIGEC</title>
 
 
-    {{-- BOOTSTRAP --}}
+    {{-- Bootstrap --}}
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-
-    {{-- FONT AWESOME --}}
+    {{-- Font Awesome --}}
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
-
-    {{-- FONTE --}}
+    {{-- Google Font --}}
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
 
     <style>
 
-        :root {
-            --azul: #003B73;
-            --laranja: #F57C00;
-            --branco: #FFFFFF;
-        }
-
-
         * {
             box-sizing: border-box;
         }
 
-
         body {
-
             margin: 0;
-
-            min-height: 100vh;
-
             font-family: 'Inter', sans-serif;
-
-            background: #FFFFFF;
-
-            color: var(--azul);
-
+            background: #f5f7fa;
+            min-height: 100vh;
         }
 
-
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
 
         .login-page {
-
             min-height: 100vh;
-
             display: flex;
-
         }
 
 
-        /* =====================================================
+        /* =========================
            LADO ESQUERDO
-        ===================================================== */
+        ========================= */
 
         .login-brand {
-
-            width: 48%;
-
-            min-height: 100vh;
-
-            background: var(--azul);
-
-            color: var(--branco);
+            width: 45%;
+            background: #003B73;
+            color: #fff;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             padding: 60px;
 
             position: relative;
-
             overflow: hidden;
+        }
 
+
+        .login-brand::after {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border: 55px solid rgba(245, 124, 0, .15);
+
+            border-radius: 50%;
+
+            right: -150px;
+            bottom: -150px;
         }
 
 
         .brand-content {
-
-            max-width: 470px;
-
+            max-width: 430px;
             position: relative;
-
             z-index: 2;
-
         }
 
 
-        /* Elementos decorativos */
+        .brand-logo {
+            width: 70px;
+            height: 70px;
 
-        .decor-circle {
+            background: rgba(255, 255, 255, .1);
 
-            position: absolute;
+            border-radius: 12px;
 
-            border-radius: 50%;
-
-            border: 2px solid rgba(255,255,255,0.10);
-
-        }
-
-
-        .circle-one {
-
-            width: 330px;
-
-            height: 330px;
-
-            right: -150px;
-
-            top: -100px;
-
-        }
-
-
-        .circle-two {
-
-            width: 450px;
-
-            height: 450px;
-
-            left: -260px;
-
-            bottom: -220px;
-
-        }
-
-
-        .orange-line {
-
-            width: 65px;
-
-            height: 5px;
-
-            background: var(--laranja);
-
-            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             margin-bottom: 25px;
 
+            font-size: 30px;
+            color: #F57C00;
         }
 
-
-        /* =====================================================
-           LOGO
-        ===================================================== */
-
-        .brand-logo {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 14px;
-
-            margin-bottom: 45px;
-
-        }
-
-
-        .brand-logo-icon {
-
-            width: 58px;
-
-            height: 58px;
-
-            background: var(--branco);
-
-            color: var(--azul);
-
-            border-radius: 14px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 27px;
-
-        }
-
-
-        .brand-logo-text {
-
-            display: flex;
-
-            flex-direction: column;
-
-        }
-
-
-        .brand-logo-text strong {
-
-            font-size: 29px;
-
-            font-weight: 800;
-
-            line-height: 1;
-
-        }
-
-
-        .brand-logo-text span {
-
-            font-size: 11px;
-
-            opacity: .75;
-
-            margin-top: 6px;
-
-        }
-
-
-        /* =====================================================
-           TEXTO
-        ===================================================== */
 
         .brand-content h1 {
-
-            font-size: 43px;
-
-            line-height: 1.12;
-
-            font-weight: 800;
-
-            margin-bottom: 20px;
-
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
 
         .brand-content h1 span {
-
-            color: var(--laranja);
-
+            color: #F57C00;
         }
 
 
-        .brand-description {
-
+        .brand-content p {
+            color: rgba(255, 255, 255, .82);
+            line-height: 1.7;
             font-size: 15px;
-
-            line-height: 1.8;
-
-            opacity: .82;
-
-            margin-bottom: 35px;
-
         }
 
 
-        /* =====================================================
-           BENEFÍCIOS
-        ===================================================== */
-
-        .brand-features {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 16px;
-
-        }
-
-
-        .brand-feature {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            font-size: 13px;
-
-        }
-
-
-        .feature-icon {
-
-            width: 36px;
-
-            height: 36px;
-
-            flex-shrink: 0;
-
-            border-radius: 9px;
-
-            background: var(--laranja);
-
-            color: var(--branco);
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-        }
-
-
-        /* =====================================================
+        /* =========================
            LADO DIREITO
-        ===================================================== */
+        ========================= */
 
-        .login-form-area {
-
-            width: 52%;
-
-            min-height: 100vh;
+        .login-area {
+            width: 55%;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             padding: 40px;
-
-            background: var(--branco);
-
         }
 
 
-        .login-card {
-
+        .login-box {
             width: 100%;
-
             max-width: 430px;
-
         }
 
-
-        /* =====================================================
-           CABEÇALHO
-        ===================================================== */
 
         .login-header {
-
             margin-bottom: 30px;
-
         }
 
 
         .login-header h2 {
-
-            color: var(--azul);
-
-            font-size: 30px;
-
-            font-weight: 800;
-
+            color: #003B73;
+            font-size: 28px;
+            font-weight: 700;
             margin-bottom: 8px;
-
         }
 
 
         .login-header p {
-
-            color: var(--azul);
-
-            opacity: .65;
-
-            font-size: 13px;
-
+            color: #6b7280;
+            font-size: 14px;
             margin: 0;
-
         }
 
 
-        /* =====================================================
-           ALERTA
-        ===================================================== */
+        /* =========================
+           PERFIL
+        ========================= */
 
-        .login-alert {
+        .selected-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
 
-            border: 1px solid rgba(245,124,0,.25);
+            background: #f3f7fb;
 
-            border-left: 4px solid var(--laranja);
-
-            background: var(--branco);
-
-            color: var(--azul);
+            border: 1px solid #dbe5ef;
 
             border-radius: 8px;
 
             padding: 12px 14px;
 
-            font-size: 12px;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        /* =====================================================
-           FORM
-        ===================================================== */
-
-        .form-group {
-
-            margin-bottom: 20px;
-
-        }
-
-
-        .form-label {
-
-            color: var(--azul);
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            margin-bottom: 8px;
-
-        }
-
-
-        .input-wrapper {
-
-            position: relative;
-
-        }
-
-
-        .input-icon {
-
-            position: absolute;
-
-            left: 15px;
-
-            top: 50%;
-
-            transform: translateY(-50%);
-
-            color: var(--azul);
-
-            opacity: .7;
-
-            font-size: 14px;
-
-            z-index: 3;
-
-        }
-
-
-        .form-control-login {
-
-            width: 100%;
-
-            height: 50px;
-
-            border: 1px solid rgba(0,59,115,.18);
-
-            border-radius: 9px;
-
-            padding: 0 45px;
-
-            color: var(--azul);
-
-            background: var(--branco);
-
-            font-size: 13px;
-
-            outline: none;
-
-            transition: all .2s ease;
-
-        }
-
-
-        .form-control-login:focus {
-
-            border-color: var(--azul);
-
-            box-shadow: 0 0 0 3px rgba(0,59,115,.08);
-
-        }
-
-
-        .form-control-login::placeholder {
-
-            color: var(--azul);
-
-            opacity: .4;
-
-        }
-
-
-        /* =====================================================
-           MOSTRAR SENHA
-        ===================================================== */
-
-        .password-toggle {
-
-            position: absolute;
-
-            right: 14px;
-
-            top: 50%;
-
-            transform: translateY(-50%);
-
-            border: none;
-
-            background: transparent;
-
-            color: var(--azul);
-
-            opacity: .6;
-
-            cursor: pointer;
-
-            z-index: 3;
-
-        }
-
-
-        .password-toggle:hover {
-
-            color: var(--laranja);
-
-            opacity: 1;
-
-        }
-
-
-        /* =====================================================
-           OPÇÕES
-        ===================================================== */
-
-        .login-options {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
             margin-bottom: 25px;
-
         }
 
 
-        .remember-option {
+        .profile-icon {
+            width: 40px;
+            height: 40px;
 
             display: flex;
-
             align-items: center;
+            justify-content: center;
 
-            gap: 7px;
+            background: #003B73;
+            color: #fff;
 
-            color: var(--azul);
+            border-radius: 7px;
 
-            font-size: 12px;
-
+            font-size: 16px;
         }
 
 
-        .remember-option input {
-
-            accent-color: var(--laranja);
-
+        .profile-text small {
+            display: block;
+            color: #6b7280;
+            font-size: 11px;
+            margin-bottom: 2px;
         }
 
 
-        .forgot-password {
+        .profile-text strong {
+            color: #003B73;
+            font-size: 14px;
+        }
 
-            color: var(--laranja);
+
+        .change-profile {
+            margin-left: auto;
+
+            color: #003B73;
 
             text-decoration: none;
 
             font-size: 12px;
-
             font-weight: 600;
-
         }
 
 
-        .forgot-password:hover {
-
-            color: var(--azul);
-
+        .change-profile:hover {
+            color: #F57C00;
         }
 
 
-        /* =====================================================
-           BOTÃO LOGIN
-        ===================================================== */
+        /* =========================
+           FORM
+        ========================= */
 
-        .btn-login {
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-            width: 100%;
 
-            height: 50px;
+        .form-label {
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
 
-            border: none;
 
-            border-radius: 9px;
+        .input-wrapper {
+            position: relative;
+        }
 
-            background: var(--azul);
 
-            color: var(--branco);
+        .input-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9ca3af;
 
             font-size: 14px;
 
-            font-weight: 700;
+            pointer-events: none;
+        }
 
-            display: flex;
 
-            align-items: center;
+        .form-control {
+            height: 48px;
 
-            justify-content: center;
+            border: 1px solid #d1d5db;
 
-            gap: 9px;
+            border-radius: 7px;
+
+            padding-left: 42px;
+
+            font-size: 14px;
+
+            box-shadow: none;
+        }
+
+
+        .form-control:focus {
+            border-color: #003B73;
+
+            box-shadow: 0 0 0 3px rgba(0, 59, 115, .08);
+        }
+
+
+        .password-toggle {
+            position: absolute;
+
+            right: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #9ca3af;
 
             cursor: pointer;
+        }
 
-            transition: all .2s ease;
 
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .login-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        .remember input {
+            accent-color: #003B73;
+        }
+
+
+        /* =========================
+           BOTÃO
+        ========================= */
+
+        .btn-login {
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #003B73;
+
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            transition: .2s;
         }
 
 
         .btn-login:hover {
-
-            background: var(--laranja);
-
-            color: var(--branco);
-
-            transform: translateY(-1px);
-
+            background: #002b54;
         }
 
 
-        /* =====================================================
-           DIVISOR
-        ===================================================== */
+        /* =========================
+           ALERTA
+        ========================= */
 
-        .login-divider {
+        .login-alert {
+            background: #fff3e8;
 
-            display: flex;
+            border: 1px solid #ffd7b5;
 
-            align-items: center;
+            color: #b45309;
 
-            gap: 12px;
+            padding: 12px 14px;
 
-            margin: 27px 0;
+            border-radius: 7px;
 
-            color: var(--azul);
+            font-size: 13px;
 
-            opacity: .35;
-
-            font-size: 10px;
-
+            margin-bottom: 20px;
         }
 
 
-        .login-divider::before,
-        .login-divider::after {
-
-            content: "";
-
-            height: 1px;
-
-            flex: 1;
-
-            background: rgba(0,59,115,.15);
-
-        }
-
-
-        /* =====================================================
-           ACESSO ESTUDANTE
-        ===================================================== */
-
-        .student-info {
-
-            border: 1px solid rgba(0,59,115,.10);
-
-            border-radius: 10px;
-
-            padding: 15px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-        }
-
-
-        .student-info-icon {
-
-            width: 38px;
-
-            height: 38px;
-
-            border-radius: 9px;
-
-            background: var(--laranja);
-
-            color: var(--branco);
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            flex-shrink: 0;
-
-        }
-
-
-        .student-info strong {
-
-            display: block;
-
-            color: var(--azul);
-
-            font-size: 12px;
-
-            margin-bottom: 3px;
-
-        }
-
-
-        .student-info span {
-
-            color: var(--azul);
-
-            opacity: .6;
-
-            font-size: 10px;
-
-            line-height: 1.4;
-
-        }
-
-
-        /* =====================================================
-           FOOTER LOGIN
-        ===================================================== */
+        /* =========================
+           FOOTER
+        ========================= */
 
         .login-footer {
-
             text-align: center;
 
-            margin-top: 30px;
+            margin-top: 25px;
 
-            color: var(--azul);
+            color: #9ca3af;
 
-            opacity: .5;
-
-            font-size: 10px;
-
+            font-size: 11px;
         }
 
 
-        /* =====================================================
+        /* =========================
            RESPONSIVO
-        ===================================================== */
+        ========================= */
 
-        @media (max-width: 991.98px) {
-
-            .login-brand {
-
-                width: 42%;
-
-                padding: 35px;
-
-            }
-
-
-            .login-form-area {
-
-                width: 58%;
-
-            }
-
-
-            .brand-content h1 {
-
-                font-size: 34px;
-
-            }
-
-        }
-
-
-        @media (max-width: 767.98px) {
+        @media (max-width: 850px) {
 
             .login-page {
-
                 display: block;
-
             }
-
 
             .login-brand {
-
                 width: 100%;
-
-                min-height: auto;
-
-                padding: 30px 25px;
-
+                min-height: 260px;
+                padding: 40px 30px;
             }
 
-
-            .brand-logo {
-
-                margin-bottom: 30px;
-
+            .login-brand .brand-content {
+                max-width: 600px;
             }
-
 
             .brand-content h1 {
-
-                font-size: 31px;
-
+                font-size: 32px;
             }
 
-
-            .brand-description {
-
-                font-size: 13px;
-
-                margin-bottom: 25px;
-
-            }
-
-
-            .brand-features {
-
-                display: none;
-
-            }
-
-
-            .login-form-area {
-
+            .login-area {
                 width: 100%;
-
-                min-height: auto;
-
-                padding: 45px 25px;
-
+                padding: 40px 25px;
             }
-
-
-            .login-card {
-
-                max-width: 100%;
-
-            }
-
         }
 
+
+        @media (max-width: 500px) {
+
+            .login-brand {
+                min-height: 230px;
+                padding: 30px 20px;
+            }
+
+            .login-area {
+                padding: 30px 20px;
+            }
+
+            .brand-content h1 {
+                font-size: 28px;
+            }
+
+            .login-header h2 {
+                font-size: 24px;
+            }
+        }
 
     </style>
 
@@ -898,117 +477,45 @@
 
 <body>
 
+
 <div class="login-page">
 
 
     {{-- =====================================================
-         LADO DA MARCA
+         LADO ESQUERDO
     ====================================================== --}}
 
-    <section class="login-brand">
-
-        <div class="decor-circle circle-one"></div>
-        <div class="decor-circle circle-two"></div>
-
+    <div class="login-brand">
 
         <div class="brand-content">
 
-
-            {{-- LOGO --}}
-
             <div class="brand-logo">
-
-                <div class="brand-logo-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-
-                <div class="brand-logo-text">
-
-                    <strong>SIGEC</strong>
-
-                    <span>
-                        Sistema de Gestão de Cursos
-                    </span>
-
-                </div>
-
+                <i class="fas fa-graduation-cap"></i>
             </div>
-
-
-            <div class="orange-line"></div>
-
 
             <h1>
-                O seu percurso
-                <span>académico</span>
-                começa aqui.
+                Bem-vindo ao
+                <span>SIGEC</span>
             </h1>
 
-
-            <p class="brand-description">
-
-                Aceda à plataforma para acompanhar
-                as suas inscrições, cursos e informações
-                académicas de forma simples e segura.
-
+            <p>
+                Sistema Integrado de Gestão de Cursos.
+                Aceda à plataforma para gerir ou consultar
+                informações académicas de acordo com o seu perfil.
             </p>
-
-
-            <div class="brand-features">
-
-                <div class="brand-feature">
-
-                    <div class="feature-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-
-                    <span>
-                        Consulte os cursos disponíveis
-                    </span>
-
-                </div>
-
-
-                <div class="brand-feature">
-
-                    <div class="feature-icon">
-                        <i class="fas fa-file-signature"></i>
-                    </div>
-
-                    <span>
-                        Acompanhe as suas inscrições
-                    </span>
-
-                </div>
-
-
-                <div class="brand-feature">
-
-                    <div class="feature-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-
-                    <span>
-                        Receba notificações importantes
-                    </span>
-
-                </div>
-
-            </div>
 
         </div>
 
-    </section>
-
+    </div>
 
 
     {{-- =====================================================
-         FORMULÁRIO
+         LADO DIREITO
     ====================================================== --}}
 
-    <section class="login-form-area">
+    <div class="login-area">
 
-        <div class="login-card">
+        <div class="login-box">
 
 
             {{-- CABEÇALHO --}}
@@ -1016,15 +523,63 @@
             <div class="login-header">
 
                 <h2>
-                    Bem-vindo de volta
+                    Entrar no sistema
                 </h2>
 
                 <p>
-                    Entre na sua conta para continuar.
+                    Utilize as suas credenciais para continuar.
                 </p>
 
             </div>
 
+
+            {{-- PERFIL SELECIONADO --}}
+
+            @php
+
+                $iconesTipo = [
+
+                    'admin' => 'fa-user-shield',
+
+                    'docente' => 'fa-chalkboard-teacher',
+
+                    'estudante' => 'fa-user-graduate',
+
+                ];
+
+            @endphp
+
+
+            <div class="selected-profile">
+
+                <div class="profile-icon">
+
+                    <i class="fas {{ $iconesTipo[$tipo] }}"></i>
+
+                </div>
+
+
+                <div class="profile-text">
+
+                    <small>
+                        Perfil selecionado
+                    </small>
+
+                    <strong>
+                        {{ $nomeTipo }}
+                    </strong>
+
+                </div>
+
+
+                <a href="{{ route('inicio') }}"
+                   class="change-profile">
+
+                    Alterar
+
+                </a>
+
+            </div>
 
 
             {{-- ERROS --}}
@@ -1042,8 +597,7 @@
             @endif
 
 
-
-            {{-- SUCESSO --}}
+            {{-- MENSAGEM DE SUCESSO --}}
 
             @if(session('success'))
 
@@ -1058,13 +612,20 @@
             @endif
 
 
-
-            {{-- FORMULÁRIO --}}
+            {{-- =================================================
+                 FORMULÁRIO
+            ================================================== --}}
 
             <form method="POST"
                   action="{{ route('login.submit') }}">
 
                 @csrf
+
+
+                {{-- PERFIL --}}
+                <input type="hidden"
+                       name="tipo"
+                       value="{{ $tipo }}">
 
 
                 {{-- EMAIL --}}
@@ -1078,6 +639,7 @@
 
                     </label>
 
+
                     <div class="input-wrapper">
 
                         <i class="fas fa-envelope input-icon"></i>
@@ -1086,7 +648,7 @@
                             type="email"
                             id="email"
                             name="email"
-                            class="form-control-login"
+                            class="form-control"
                             value="{{ old('email') }}"
                             placeholder="Digite o seu email"
                             autocomplete="email"
@@ -1097,7 +659,6 @@
                     </div>
 
                 </div>
-
 
 
                 {{-- SENHA --}}
@@ -1111,25 +672,27 @@
 
                     </label>
 
+
                     <div class="input-wrapper">
 
                         <i class="fas fa-lock input-icon"></i>
+
 
                         <input
                             type="password"
                             id="senha"
                             name="senha"
-                            class="form-control-login"
+                            class="form-control"
                             placeholder="Digite a sua senha"
                             autocomplete="current-password"
                             required
                         >
 
+
                         <button
                             type="button"
                             class="password-toggle"
-                            id="togglePassword"
-                            title="Mostrar senha">
+                            id="togglePassword">
 
                             <i class="fas fa-eye"></i>
 
@@ -1140,36 +703,23 @@
                 </div>
 
 
-
                 {{-- OPÇÕES --}}
 
                 <div class="login-options">
 
-                    <label class="remember-option">
+                    <label class="remember">
 
                         <input
                             type="checkbox"
                             name="lembrar"
                             value="1"
-                            {{ old('lembrar') ? 'checked' : '' }}
                         >
 
-                        <span>
-                            Lembrar-me
-                        </span>
+                        Lembrar-me
 
                     </label>
 
-
-                    <a href="#"
-                       class="forgot-password">
-
-                        Esqueceu a senha?
-
-                    </a>
-
                 </div>
-
 
 
                 {{-- BOTÃO --}}
@@ -1178,9 +728,7 @@
                     type="submit"
                     class="btn-login">
 
-                    <span>
-                        Entrar na plataforma
-                    </span>
+                    Entrar
 
                     <i class="fas fa-arrow-right"></i>
 
@@ -1189,53 +737,25 @@
             </form>
 
 
-
-            <div class="login-divider">
-                ACESSO À PLATAFORMA
-            </div>
-
-
-
-            {{-- INFORMAÇÃO --}}
-
-            <div class="student-info">
-
-                <div class="student-info-icon">
-
-                    <i class="fas fa-user-graduate"></i>
-
-                </div>
-
-                <div>
-
-                    <strong>
-                        Área do Estudante
-                    </strong>
-
-                    <span>
-                        Utilize as credenciais fornecidas
-                        pela instituição para entrar.
-                    </span>
-
-                </div>
-
-            </div>
-
-
+            {{-- FOOTER --}}
 
             <div class="login-footer">
 
-                © {{ date('Y') }} SIGEC · Sistema de Gestão de Cursos
+                SIGEC — Sistema Integrado de Gestão de Cursos
 
             </div>
 
+
         </div>
 
-    </section>
+    </div>
 
 </div>
 
 
+{{-- =====================================================
+     JAVASCRIPT
+====================================================== --}}
 
 <script>
 
@@ -1246,28 +766,43 @@
         document.getElementById('senha');
 
 
-    togglePassword.addEventListener('click', function () {
+    if (togglePassword && password) {
 
-        const type =
-            password.getAttribute('type') === 'password'
-                ? 'text'
-                : 'password';
+        togglePassword.addEventListener('click', function () {
 
+            const type =
+                password.getAttribute('type') === 'password'
+                    ? 'text'
+                    : 'password';
 
-        password.setAttribute('type', type);
-
-
-        const icon =
-            this.querySelector('i');
+            password.setAttribute('type', type);
 
 
-        icon.classList.toggle('fa-eye');
+            const icon =
+                this.querySelector('i');
 
-        icon.classList.toggle('fa-eye-slash');
 
-    });
+            if (type === 'password') {
+
+                icon.classList.remove('fa-eye-slash');
+
+                icon.classList.add('fa-eye');
+
+            } else {
+
+                icon.classList.remove('fa-eye');
+
+                icon.classList.add('fa-eye-slash');
+
+            }
+
+        });
+
+    }
 
 </script>
 
+
 </body>
+
 </html>
