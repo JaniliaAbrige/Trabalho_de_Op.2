@@ -101,6 +101,7 @@
 
                     <ul class="dropdown-menu">
 
+<<<<<<< Updated upstream
                         <li>
                             <a class="dropdown-item"
                                href="{{ Route::has('inscricoes.index') ? route('inscricoes.index') : '#' }}">
@@ -303,6 +304,9 @@
                 @endauth
 
             </div>
+=======
+        <a href="{{ url('/') }}" class="navbar-logo">JAM-acad<span>.</span></a>
+>>>>>>> Stashed changes
 
         </div>
     </div>
