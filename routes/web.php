@@ -57,6 +57,16 @@ Route::post(
     [LoginController::class, 'login']
 )->name('login.submit');
 
+Route::get(
+    '/signup',
+    [UsuarioController::class, 'create']
+)->name('signup');
+
+Route::post(
+    '/signup',
+    [UsuarioController::class, 'store']
+)->name('signup.submit');
+
 Route::post(
     '/logout',
     [LoginController::class, 'logout']

@@ -146,8 +146,8 @@
             </div>
 
             <div class="sg-nav-actions">
-                <a href="" class="sg-btn-login">Entrar</a>
-                <a href="" class="sg-btn-signup">Criar conta</a>
+                <a href="{{ route('login', ['tipo' => 'estudante']) }}" class="sg-btn-login">Entrar</a>
+                <a href="{{ route('signup') }}" class="sg-btn-signup">Criar conta</a>
             </div>
         </div>
     </div>
