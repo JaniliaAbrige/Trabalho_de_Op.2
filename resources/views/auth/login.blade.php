@@ -812,4 +812,6 @@
 
 </body>
 
+    @include('components.navbar')
+
 </html>

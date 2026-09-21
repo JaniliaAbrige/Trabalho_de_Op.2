@@ -114,9 +114,9 @@
             position: absolute;
             inset: 0;
 
-            background-image: url('{{ asset('imgs/login-foto.jpg') }}');
-            background-size: cover;
-            background-position: center;
+            background-image: url('{{ asset('Imgs/Signup.jpg') }}');
+
+            background-position: 100% center;
 
             clip-path: url(#signupBlobClip);
         }
@@ -187,9 +187,7 @@
         ========================= */
 
         .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            display: block;
         }
 
         .form-group {
@@ -206,10 +204,12 @@
 
         .input-wrapper {
             position: relative;
+            max-width: 270px;
         }
 
         .form-control {
             width: 100%;
+            max-width: 250px;
             border: none;
             border-bottom: 1px solid #d8d5e2;
             border-radius: 0;
@@ -425,11 +425,11 @@
     <svg width="0" height="0" style="position:absolute;">
         <clipPath id="signupBlobClip" clipPathUnits="objectBoundingBox">
             <path d="M1,0
-                     L0.62,0
-                     C0.50,0.08 0.48,0.18 0.55,0.28
-                     C0.62,0.38 0.58,0.48 0.50,0.55
-                     C0.42,0.62 0.48,0.72 0.58,0.80
-                     C0.65,0.86 0.60,0.94 0.65,1
+                     L0.50,0
+                     C0.38,0.08 0.36,0.18 0.43,0.28
+                     C0.50,0.38 0.46,0.48 0.38,0.55
+                     C0.30,0.62 0.36,0.72 0.46,0.80
+                     C0.53,0.86 0.48,0.94 0.53,1
                      L1,1
                      Z" />
         </clipPath>

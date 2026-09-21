@@ -27,12 +27,18 @@ class Curso extends Model
         'estado',
         'data_inicio',
         'data_fim',
+        'capa',
+        'gratis',
+        'documentos',
+        'link_aula',
     ];
 
     protected $casts = [
         'preco' => 'decimal:2',
         'data_inicio' => 'date',
         'data_fim' => 'date',
+        'gratis' => 'boolean',
+        'documentos' => 'array',
     ];
 
     /**

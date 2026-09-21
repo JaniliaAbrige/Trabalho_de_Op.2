@@ -76,8 +76,7 @@ class CursoController extends Controller
 
             'modalidade' => [
                 'required',
-                'string',
-                'max:100',
+                'in:Presencial,Online,Híbrido',
             ],
 
             'requisitos' => [
@@ -86,7 +85,7 @@ class CursoController extends Controller
             ],
 
             'preco' => [
-                'required',
+                'nullable',
                 'numeric',
                 'min:0',
             ],
@@ -100,15 +99,21 @@ class CursoController extends Controller
             'estado' => 'required|in:1,0',
 
             'data_inicio' => [
-                'required',
+                'nullable',
                 'date',
             ],
 
             'data_fim' => [
-                'required',
+                'nullable',
                 'date',
                 'after_or_equal:data_inicio',
             ],
+
+            'capa' => ['nullable', 'image', 'max:2048'],
+            'gratis' => ['nullable', 'boolean'],
+            'documentos' => ['nullable', 'array'],
+            'documentos.*' => ['file', 'mimes:pdf,mp4,mov,avi,webm', 'max:51200'],
+            'link_aula' => ['nullable', 'url', 'max:255'],
         ], [
             'categoria_id.required' => 'Selecione uma categoria.',
             'categoria_id.exists' => 'A categoria selecionada não existe.',
@@ -125,7 +130,6 @@ class CursoController extends Controller
 
             'modalidade.required' => 'Informe a modalidade.',
 
-            'preco.required' => 'Informe o preço do curso.',
             'preco.numeric' => 'O preço deve ser um valor numérico.',
 
             'vagas.required' => 'Informe o número de vagas.',
@@ -133,10 +137,10 @@ class CursoController extends Controller
 
             'estado.required' => 'Selecione o estado do curso.',
 
-            'data_inicio.required' => 'Informe a data de início.',
-            'data_fim.required' => 'Informe a data de fim.',
             'data_fim.after_or_equal' => 'A data de fim deve ser igual ou posterior à data de início.',
         ]);
+
+        $validated = $this->prepareCourseData($request, $validated);
 
         Curso::create($validated);
 
@@ -212,8 +216,7 @@ class CursoController extends Controller
 
             'modalidade' => [
                 'required',
-                'string',
-                'max:100',
+                'in:Presencial,Online,Híbrido',
             ],
 
             'requisitos' => [
@@ -222,7 +225,7 @@ class CursoController extends Controller
             ],
 
             'preco' => [
-                'required',
+                'nullable',
                 'numeric',
                 'min:0',
             ],
@@ -233,19 +236,27 @@ class CursoController extends Controller
                 'min:1',
             ],
 
-           'estado' => 'required|in:1,0',
+            'estado' => 'required|in:1,0',
 
             'data_inicio' => [
-                'required',
+                'nullable',
                 'date',
             ],
 
             'data_fim' => [
-                'required',
+                'nullable',
                 'date',
                 'after_or_equal:data_inicio',
             ],
+
+            'capa' => ['nullable', 'image', 'max:2048'],
+            'gratis' => ['nullable', 'boolean'],
+            'documentos' => ['nullable', 'array'],
+            'documentos.*' => ['file', 'mimes:pdf,mp4,mov,avi,webm', 'max:51200'],
+            'link_aula' => ['nullable', 'url', 'max:255'],
         ]);
+
+        $validated = $this->prepareCourseData($request, $validated, $curso);
 
         $curso->update($validated);
 
@@ -272,7 +283,7 @@ class CursoController extends Controller
     public function ativar(Curso $curso)
     {
         $curso->update([
-            'estado' => 'ativo',
+            'estado' => 'aberto',
         ]);
 
         return redirect()
@@ -286,11 +297,44 @@ class CursoController extends Controller
     public function desativar(Curso $curso)
     {
         $curso->update([
-            'estado' => 'inativo',
+            'estado' => 'fechado',
         ]);
 
         return redirect()
             ->route('cursos.index')
             ->with('success', 'Curso desativado com sucesso.');
+    }
+
+    private function prepareCourseData(Request $request, array $validated, ?Curso $curso = null): array
+    {
+        $validated['modalidade'] = match ($validated['modalidade']) {
+            'Presencial' => 'presencial',
+            'Online' => 'online',
+            'Híbrido' => 'hibrido',
+        };
+
+        $validated['estado'] = $validated['estado'] === '1' ? 'aberto' : 'fechado';
+        $validated['gratis'] = $request->boolean('gratis');
+
+        if ($validated['gratis']) {
+            $validated['preco'] = 0;
+        }
+
+        if ($request->hasFile('capa')) {
+            $validated['capa'] = $request->file('capa')->store('cursos/capas', 'public');
+        } elseif ($curso) {
+            unset($validated['capa']);
+        }
+
+        if ($request->hasFile('documentos')) {
+            $validated['documentos'] = collect($request->file('documentos'))
+                ->map(fn ($documento) => $documento->store('cursos/documentos', 'public'))
+                ->values()
+                ->all();
+        } elseif ($curso) {
+            unset($validated['documentos']);
+        }
+
+        return $validated;
     }
 }

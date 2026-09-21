@@ -59,7 +59,9 @@ Route::post(
 
 Route::get(
     '/signup',
-    [UsuarioController::class, 'create']
+    function () {
+        return view('auth.signup');
+    }
 )->name('signup');
 
 Route::post(

@@ -5,10 +5,21 @@
 @section('content')
 
 <style>
+    :root {
+        --sg-primary: #6C3CE9;
+        --sg-primary-dark: #4C1FB8;
+        --sg-primary-light: #F1ECFE;
+        --sg-teal: #2DD4BF;
+        --sg-text: #1F2333;
+        --sg-muted: #6b7280;
+        --sg-border: #ECEAF5;
+    }
+
     .curso-page {
-        background: #f8fafc;
+        background: #F8F7FC;
         min-height: calc(100vh - 140px);
         padding: 35px 0 50px;
+        font-family: 'Inter', sans-serif;
     }
 
     .page-header {
@@ -16,54 +27,58 @@
     }
 
     .page-header h1 {
-        color: #003B73;
+        font-family: 'Poppins', sans-serif;
+        color: var(--sg-text);
         font-size: 26px;
         font-weight: 700;
         margin: 0;
     }
 
     .page-header p {
-        color: #6b7280;
+        color: var(--sg-muted);
         margin: 6px 0 0;
         font-size: 14px;
     }
 
     .curso-card {
         background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
+        border: 1px solid var(--sg-border);
+        border-radius: 14px;
         overflow: hidden;
     }
 
     .card-title-area {
         padding: 20px 24px;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--sg-border);
         display: flex;
         align-items: center;
         gap: 12px;
+        background: linear-gradient(135deg, var(--sg-primary), #9B6DFF);
     }
 
     .title-icon {
         width: 42px;
         height: 42px;
-        border-radius: 8px;
-        background: #003B73;
+        border-radius: 10px;
+        background: rgba(255,255,255,.18);
         color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 17px;
+        flex-shrink: 0;
     }
 
     .card-title-area h2 {
-        color: #003B73;
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
         font-size: 18px;
         font-weight: 700;
         margin: 0;
     }
 
     .card-title-area p {
-        color: #6b7280;
+        color: rgba(255,255,255,.8);
         font-size: 12px;
         margin: 3px 0 0;
     }
@@ -73,12 +88,21 @@
     }
 
     .section-title {
-        color: #003B73;
+        font-family: 'Poppins', sans-serif;
+        color: var(--sg-text);
         font-size: 15px;
         font-weight: 700;
         margin-bottom: 18px;
         padding-bottom: 10px;
-        border-bottom: 2px solid #F57C00;
+        border-bottom: 2px solid var(--sg-primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .section-title i {
+        color: var(--sg-primary);
+        font-size: 13px;
     }
 
     .form-label {
@@ -91,15 +115,15 @@
     .form-control,
     .form-select {
         border: 1px solid #d1d5db;
-        border-radius: 7px;
+        border-radius: 8px;
         min-height: 43px;
         font-size: 14px;
     }
 
     .form-control:focus,
     .form-select:focus {
-        border-color: #003B73;
-        box-shadow: 0 0 0 3px rgba(0, 59, 115, .08);
+        border-color: var(--sg-primary);
+        box-shadow: 0 0 0 3px rgba(108, 60, 233, .1);
     }
 
     textarea.form-control {
@@ -108,22 +132,247 @@
     }
 
     .required {
-        color: #F57C00;
+        color: var(--sg-primary);
     }
 
     .form-text {
         font-size: 11px;
-        color: #6b7280;
+        color: var(--sg-muted);
     }
 
     .invalid-feedback {
         font-size: 12px;
     }
 
+
+    /* ===== CAPA DO CURSO (upload de imagem) ===== */
+
+    .capa-upload {
+        position: relative;
+        border: 2px dashed #D9D1F7;
+        border-radius: 12px;
+        background: var(--sg-primary-light);
+        min-height: 190px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        cursor: pointer;
+        overflow: hidden;
+        transition: .2s;
+    }
+
+    .capa-upload:hover {
+        border-color: var(--sg-primary);
+    }
+
+    .capa-upload input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .capa-upload-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--sg-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+
+    .capa-upload-text strong {
+        display: block;
+        color: var(--sg-text);
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+
+    .capa-upload-text span {
+        color: var(--sg-muted);
+        font-size: 11px;
+    }
+
+    .capa-preview {
+        display: none;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    /* ===== GRATUITO (toggle) ===== */
+
+    .gratis-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+
+        background: var(--sg-primary-light);
+        border: 1px solid #E4D9FC;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+    }
+
+    .gratis-box-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .gratis-box-label i {
+        color: var(--sg-primary);
+        font-size: 16px;
+    }
+
+    .gratis-box-label strong {
+        display: block;
+        color: var(--sg-text);
+        font-size: 13px;
+    }
+
+    .gratis-box-label span {
+        color: var(--sg-muted);
+        font-size: 11px;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .switch-slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background: #d1d5db;
+        border-radius: 24px;
+        transition: .2s;
+    }
+
+    .switch-slider::before {
+        content: "";
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        top: 3px;
+        background: #fff;
+        border-radius: 50%;
+        transition: .2s;
+    }
+
+    .switch input:checked + .switch-slider {
+        background: var(--sg-primary);
+    }
+
+    .switch input:checked + .switch-slider::before {
+        transform: translateX(20px);
+    }
+
+    #preco-wrapper.disabled {
+        opacity: .4;
+        pointer-events: none;
+    }
+
+
+    /* ===== MATERIAIS / UPLOAD DE DOCUMENTOS ===== */
+
+    .materiais-upload {
+        border: 2px dashed var(--sg-border);
+        border-radius: 12px;
+        padding: 26px 20px;
+        text-align: center;
+        position: relative;
+        background: #FAFAFD;
+        transition: .2s;
+    }
+
+    .materiais-upload:hover {
+        border-color: var(--sg-primary);
+    }
+
+    .materiais-upload input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .materiais-upload-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--sg-primary-light);
+        color: var(--sg-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        margin: 0 auto 10px;
+    }
+
+    .materiais-upload strong {
+        display: block;
+        color: var(--sg-text);
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+
+    .materiais-upload span {
+        color: var(--sg-muted);
+        font-size: 11px;
+    }
+
+    #lista-materiais {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .material-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid var(--sg-border);
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-size: 12px;
+        color: var(--sg-text);
+    }
+
+    .material-item i {
+        color: var(--sg-primary);
+    }
+
+
     .form-footer {
         margin-top: 25px;
         padding-top: 20px;
-        border-top: 1px solid #e5e7eb;
+        border-top: 1px solid var(--sg-border);
         display: flex;
         justify-content: flex-end;
         gap: 10px;
@@ -133,7 +382,7 @@
         border: 1px solid #d1d5db;
         color: #374151;
         background: #fff;
-        border-radius: 7px;
+        border-radius: 8px;
         padding: 10px 18px;
         font-size: 13px;
         font-weight: 600;
@@ -142,21 +391,21 @@
 
     .btn-cancelar:hover {
         background: #f8fafc;
-        color: #003B73;
+        color: var(--sg-primary);
     }
 
     .btn-registar {
         border: none;
-        background: #F57C00;
+        background: var(--sg-primary);
         color: #fff;
-        border-radius: 7px;
+        border-radius: 8px;
         padding: 10px 20px;
         font-size: 13px;
         font-weight: 600;
     }
 
     .btn-registar:hover {
-        background: #003B73;
+        background: var(--sg-primary-dark);
         color: #fff;
     }
 
@@ -199,10 +448,6 @@
         <div class="curso-card">
 
             <div class="card-title-area">
-                <div class="title-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-
                 <div>
                     <h2>Dados do curso</h2>
                     <p>Informações gerais e condições de inscrição</p>
@@ -211,7 +456,16 @@
 
             <div class="form-area">
 
-                <form action="{{ route('cursos.store') }}" method="POST">
+                {{--
+                    NOTA IMPORTANTE: este form envia ficheiros (capa, documentos),
+                    por isso precisa de enctype="multipart/form-data". O
+                    CursoController::store() que me mandaste ainda não valida nem
+                    guarda capa, gratis, documentos[] nem link_aula — vais
+                    precisar de adicionar essas colunas à tabela cursos (migration)
+                    e as regras correspondentes no validate().
+                --}}
+
+                <form action="{{ route('cursos.store') }}" method="POST" enctype="multipart/form-data" id="form-curso">
 
                     @csrf
 
@@ -222,10 +476,34 @@
 
                     <div class="row g-3">
 
+                        {{-- CAPA DO CURSO --}}
+                        <div class="col-12">
+                            <label class="form-label">
+                                Capa do curso <span class="form-text">(opcional — recomendado 1200x630px)</span>
+                            </label>
+
+                            <label class="capa-upload" id="capa-upload">
+                                <input type="file" name="capa" id="capa" accept="image/*">
+
+                                <img id="capa-preview" class="capa-preview" alt="Pré-visualização da capa">
+
+                                <div id="capa-placeholder">
+                                    <div class="capa-upload-text">
+                                        <strong>Clique para carregar a imagem de capa</strong>
+                                        <span>PNG ou JPG, até 2MB</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            @error('capa')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         {{-- CATEGORIA --}}
                         <div class="col-md-6">
                             <label for="categoria_id" class="form-label">
-                                Categoria <span class="required">*</span>
+                                Categoria
                             </label>
 
                             <select
@@ -256,7 +534,7 @@
                         {{-- CÓDIGO --}}
                         <div class="col-md-6">
                             <label for="codigo" class="form-label">
-                                Código do curso <span class="required">*</span>
+                                Código do curso
                             </label>
 
                             <input
@@ -279,7 +557,7 @@
                         {{-- NOME --}}
                         <div class="col-12">
                             <label for="nome" class="form-label">
-                                Nome do curso <span class="required">*</span>
+                                Nome do curso
                             </label>
 
                             <input
@@ -331,7 +609,7 @@
                         {{-- DURAÇÃO --}}
                         <div class="col-md-4">
                             <label for="duracao" class="form-label">
-                                Duração <span class="required">*</span>
+                                Duração
                             </label>
 
                             <input
@@ -354,7 +632,7 @@
                         {{-- CARGA HORÁRIA --}}
                         <div class="col-md-4">
                             <label for="carga_horaria" class="form-label">
-                                Carga horária <span class="required">*</span>
+                                Carga horária
                             </label>
 
                             <input
@@ -378,7 +656,7 @@
                         {{-- MODALIDADE --}}
                         <div class="col-md-4">
                             <label for="modalidade" class="form-label">
-                                Modalidade <span class="required">*</span>
+                                Modalidade
                             </label>
 
                             <select
@@ -408,37 +686,31 @@
 
                     </div>
 
-                    {{-- CONDIÇÕES --}}
+                    {{-- PREÇO --}}
                     <div class="section-title mt-4">
-                        Condições de inscrição
+                        Preço e vagas
+                    </div>
+
+                    <div class="gratis-box">
+                        <div class="gratis-box-label">
+                            <div>
+                                <strong>Este curso é gratuito</strong>
+                                <span>Ative para esconder o campo de preço</span>
+                            </div>
+                        </div>
+
+                        <label class="switch">
+                            <input type="checkbox" name="gratis" id="gratis" value="1" {{ old('gratis') ? 'checked' : '' }}>
+                            <span class="switch-slider"></span>
+                        </label>
                     </div>
 
                     <div class="row g-3">
 
-                        {{-- REQUISITOS --}}
-                        <div class="col-md-6">
-                            <label for="requisitos" class="form-label">
-                                Requisitos
-                            </label>
-
-                            <textarea
-                                name="requisitos"
-                                id="requisitos"
-                                class="form-control @error('requisitos') is-invalid @enderror"
-                                placeholder="Indique os requisitos necessários para inscrição..."
-                            >{{ old('requisitos') }}</textarea>
-
-                            @error('requisitos')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
                         {{-- PREÇO --}}
-                        <div class="col-md-3">
+                        <div class="col-md-6" id="preco-wrapper">
                             <label for="preco" class="form-label">
-                                Preço <span class="required">*</span>
+                                Preço
                             </label>
 
                             <div class="input-group">
@@ -451,7 +723,6 @@
                                     placeholder="0.00"
                                     min="0"
                                     step="0.01"
-                                    required
                                 >
                                 <span class="input-group-text">MT</span>
                             </div>
@@ -464,9 +735,9 @@
                         </div>
 
                         {{-- VAGAS --}}
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <label for="vagas" class="form-label">
-                                Vagas <span class="required">*</span>
+                                Vagas
                             </label>
 
                             <input
@@ -489,6 +760,86 @@
 
                     </div>
 
+                    {{-- MATERIAIS E VIDEOAULA --}}
+                    <div class="section-title mt-4">
+                        Materiais e videoaula
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-12">
+                            <label class="form-label">
+                                Documentos e vídeos do curso <span class="form-text">(opcional)</span>
+                            </label>
+
+                            <div class="materiais-upload" id="materiais-upload">
+                                <input type="file" name="documentos[]" id="documentos" accept=".pdf,video/*" multiple>
+
+                                <strong>Clique para carregar PDFs ou vídeos</strong>
+                                <span>Pode selecionar vários ficheiros — PDF, MP4, MOV</span>
+                            </div>
+
+                            <div id="lista-materiais"></div>
+
+                            @error('documentos')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12">
+                            <label for="link_aula" class="form-label">
+                                Link da videochamada / aula ao vivo <span class="form-text">(opcional)</span>
+                            </label>
+
+                            <div class="input-group">
+                                <input
+                                    type="url"
+                                    name="link_aula"
+                                    id="link_aula"
+                                    class="form-control @error('link_aula') is-invalid @enderror"
+                                    value="{{ old('link_aula') }}"
+                                    placeholder="Ex.: https://meet.google.com/xxx-xxxx-xxx"
+                                >
+                            </div>
+
+                            @error('link_aula')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                    </div>
+
+                    {{-- CONDIÇÕES --}}
+                    <div class="section-title mt-4">
+                        Condições de inscrição
+                    </div>
+
+                    <div class="row g-3">
+
+                        {{-- REQUISITOS --}}
+                        <div class="col-12">
+                            <label for="requisitos" class="form-label">
+                                Requisitos
+                            </label>
+
+                            <textarea
+                                name="requisitos"
+                                id="requisitos"
+                                class="form-control @error('requisitos') is-invalid @enderror"
+                                placeholder="Indique os requisitos necessários para inscrição..."
+                            >{{ old('requisitos') }}</textarea>
+
+                            @error('requisitos')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                    </div>
+
                     {{-- PERÍODO --}}
                     <div class="section-title mt-4">
                         Período de realização
@@ -499,7 +850,7 @@
                         {{-- DATA INÍCIO --}}
                         <div class="col-md-4">
                             <label for="data_inicio" class="form-label">
-                                Data de início <span class="required">*</span>
+                                Data de início
                             </label>
 
                             <input
@@ -521,7 +872,7 @@
                         {{-- DATA FIM --}}
                         <div class="col-md-4">
                             <label for="data_fim" class="form-label">
-                                Data de fim <span class="required">*</span>
+                                Data de fim
                             </label>
 
                             <input
@@ -539,33 +890,34 @@
                                 </div>
                             @enderror
                         </div>
+
                         {{-- ESTADO --}}
-<div class="col-md-4">
-    <label for="estado" class="form-label">
-        Estado <span class="required">*</span>
-    </label>
+                        <div class="col-md-4">
+                            <label for="estado" class="form-label">
+                                Estado
+                            </label>
 
-    <select
-        name="estado"
-        id="estado"
-        class="form-select @error('estado') is-invalid @enderror"
-        required
-    >
-        <option value="1" {{ old('estado', '1') == '1' ? 'selected' : '' }}>
-            Ativo
-        </option>
+                            <select
+                                name="estado"
+                                id="estado"
+                                class="form-select @error('estado') is-invalid @enderror"
+                                required
+                            >
+                                <option value="1" {{ old('estado', '1') == '1' ? 'selected' : '' }}>
+                                    Ativo
+                                </option>
 
-        <option value="0" {{ old('estado') === '0' ? 'selected' : '' }}>
-            Inativo
-        </option>
-    </select>
+                                <option value="0" {{ old('estado') === '0' ? 'selected' : '' }}>
+                                    Inativo
+                                </option>
+                            </select>
 
-    @error('estado')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
+                            @error('estado')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                     </div>
 
@@ -576,7 +928,6 @@
                             href="{{ route('cursos.index') }}"
                             class="btn-cancelar"
                         >
-                            <i class="fas fa-arrow-left me-1"></i>
                             Cancelar
                         </a>
 
@@ -584,7 +935,6 @@
                             type="submit"
                             class="btn-registar"
                         >
-                            <i class="fas fa-save me-1"></i>
                             Registar curso
                         </button>
 
@@ -599,5 +949,70 @@
     </div>
 
 </div>
+
+
+<script>
+
+    // Pré-visualização da capa
+    (function () {
+        const input = document.getElementById('capa');
+        const preview = document.getElementById('capa-preview');
+        const placeholder = document.getElementById('capa-placeholder');
+
+        input.addEventListener('change', function () {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    })();
+
+    // Toggle "gratuito" esconde/desativa o campo de preço
+    (function () {
+        const checkbox = document.getElementById('gratis');
+        const wrapper = document.getElementById('preco-wrapper');
+        const preco = document.getElementById('preco');
+
+        function atualizar() {
+            if (checkbox.checked) {
+                wrapper.classList.add('disabled');
+                preco.removeAttribute('required');
+                preco.value = 0;
+            } else {
+                wrapper.classList.remove('disabled');
+                preco.setAttribute('required', 'required');
+            }
+        }
+
+        checkbox.addEventListener('change', atualizar);
+        atualizar();
+    })();
+
+    // Lista os ficheiros escolhidos em "Materiais e videoaula"
+    (function () {
+        const input = document.getElementById('documentos');
+        const lista = document.getElementById('lista-materiais');
+
+        input.addEventListener('change', function () {
+            lista.innerHTML = '';
+
+            Array.from(this.files).forEach(function (file) {
+                const item = document.createElement('div');
+                item.className = 'material-item';
+                item.textContent = file.name;
+
+                lista.appendChild(item);
+            });
+        });
+    })();
+
+</script>
 
 @endsection

@@ -67,7 +67,7 @@ class UsuarioController extends Controller
             'telefone' => $validated['telefone'] ?? null,
             'senha' => Hash::make($validated['senha']),
             'tipo' => $validated['tipo'],
-            'estado' => $validated['estado'],
+            'estado' => $validated['estado'] === 'ativo',
         ]);
 
         return redirect()
