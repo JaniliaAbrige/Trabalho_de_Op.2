@@ -12,7 +12,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('nome')->unique();
-            $table->text('descricao')->nullable();
+            $table->text('descricao')->nullable(
+                
+            );
             $table->boolean('estado')->default(true);
 
             $table->timestamps();
