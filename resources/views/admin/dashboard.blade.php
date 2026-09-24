@@ -226,202 +226,152 @@
 
     {{-- ESTATÍSTICAS --}}
     <div class="row g-4">
-
-        {{-- CURSOS --}}
-        <div class="col-xl-3 col-md-6">
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div>
-                        <div class="stat-label mt-0">
-                            Total de Cursos
-                        </div>
-
-                        <div class="stat-value">
-                            {{ \App\Models\Curso::count() }}
-                        </div>
-                    </div>
-
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-
+{{-- CURSOS --}}
+<div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+        <div class="stat-top">
+            <div>
+                <div class="stat-label mt-0">
+                    Total de Cursos
                 </div>
 
+                <div class="stat-value">
+                    {{ \App\Models\Curso::count() }}
+                </div>
             </div>
 
+            <div class="stat-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
         </div>
+    </div>
+</div>
 
-
-        {{-- DISCIPLINAS --}}
-        <div class="col-xl-3 col-md-6">
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div>
-                        <div class="stat-label mt-0">
-                            Disciplinas
-                        </div>
-
-                        <div class="stat-value">
-                            {{ \App\Models\Disciplina::count() }}
-                        </div>
-                    </div>
-
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-book"></i>
-                    </div>
-
+{{-- CATEGORIAS --}}
+<div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+        <div class="stat-top">
+            <div>
+                <div class="stat-label mt-0">
+                    Categorias
                 </div>
 
+                <div class="stat-value">
+                    {{ \App\Models\Categoria::count() }}
+                </div>
             </div>
 
+            <div class="stat-icon">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
         </div>
+    </div>
+</div>
 
-
-        {{-- DOCENTES --}}
-        <div class="col-xl-3 col-md-6">
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div>
-                        <div class="stat-label mt-0">
-                            Docentes
-                        </div>
-
-                        <div class="stat-value">
-                            {{ \App\Models\Docente::count() }}
-                        </div>
-                    </div>
-
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-chalkboard-user"></i>
-                    </div>
-
+{{-- DISCIPLINAS --}}
+<div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+        <div class="stat-top">
+            <div>
+                <div class="stat-label mt-0">
+                    Disciplinas
                 </div>
 
+                <div class="stat-value">
+                    {{ \App\Models\Disciplina::count() }}
+                </div>
             </div>
 
+            <div class="stat-icon">
+                <i class="fa-solid fa-book"></i>
+            </div>
         </div>
+    </div>
+</div>
 
-
-        {{-- ESTUDANTES --}}
-        <div class="col-xl-3 col-md-6">
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div>
-                        <div class="stat-label mt-0">
-                            Estudantes
-                        </div>
-
-                        <div class="stat-value">
-                            {{ \App\Models\Estudante::count() }}
-                        </div>
-                    </div>
-
-                    <div class="stat-icon">
-                        <i class="fa-solid fa-user-graduate"></i>
-                    </div>
-
+{{-- DOCENTES --}}
+<div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+        <div class="stat-top">
+            <div>
+                <div class="stat-label mt-0">
+                    Docentes
                 </div>
 
+                <div class="stat-value">
+                    {{ \App\Models\Docente::count() }}
+                </div>
             </div>
 
+            <div class="stat-icon">
+                <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
         </div>
-
+    </div>
+</div>
     </div>
 
 
-    {{-- ACÇÕES RÁPIDAS --}}
-    <div class="dashboard-section">
+  {{-- ACÇÕES RÁPIDAS --}}
+<div class="row g-3 mt-1">
 
-        <div class="section-header">
-            <h5>
-                <i class="fa-solid fa-bolt me-2"></i>
-                Ações rápidas
-            </h5>
-        </div>
-
-        <div class="row g-3">
-
-            <div class="col-xl-3 col-md-6">
-                <a href="{{ route('cursos.create') }}" class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
-
-                    <div>
-                        <strong>Novo Curso</strong>
-                        <small>Cadastrar curso</small>
-                    </div>
-
-                </a>
+    {{-- NOVO CURSO --}}
+    <div class="col-xl-3 col-md-6">
+        <a href="{{ route('cursos.create') }}" class="quick-card">
+            <div class="quick-icon">
+                <i class="fa-solid fa-plus"></i>
             </div>
 
-
-            <div class="col-xl-3 col-md-6">
-                <a href="{{ route('disciplinas.create') }}" class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-file-circle-plus"></i>
-                    </div>
-
-                    <div>
-                        <strong>Nova Disciplina</strong>
-                        <small>Cadastrar disciplina</small>
-                    </div>
-
-                </a>
+            <div>
+                <strong>Novo Curso</strong>
+                <small>Cadastrar curso</small>
             </div>
-
-
-            <div class="col-xl-3 col-md-6">
-                <a href="{{ route('usuarios.create') }}" class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-user-plus"></i>
-                    </div>
-
-                    <div>
-                        <strong>Novo Utilizador</strong>
-                        <small>Criar utilizador</small>
-                    </div>
-
-                </a>
-            </div>
-
-
-            <div class="col-xl-3 col-md-6">
-                <a href="{{ route('estudantes.create') }}" class="quick-card">
-
-                    <div class="quick-icon">
-                        <i class="fa-solid fa-user-graduate"></i>
-                    </div>
-
-                    <div>
-                        <strong>Novo Estudante</strong>
-                        <small>Registar estudante</small>
-                    </div>
-
-                </a>
-            </div>
-
-        </div>
-
+        </a>
     </div>
 
+    {{-- NOVA CATEGORIA --}}
+    <div class="col-xl-3 col-md-6">
+        <a href="{{ route('categorias.create') }}" class="quick-card">
+            <div class="quick-icon">
+                <i class="fa-solid fa-folder-plus"></i>
+            </div>
 
-    {{-- RESUMO DO SISTEMA --}}
+            <div>
+                <strong>Nova Categoria</strong>
+                <small>Cadastrar categoria</small>
+            </div>
+        </a>
+    </div>
+
+    {{-- NOVA DISCIPLINA --}}
+    <div class="col-xl-3 col-md-6">
+        <a href="{{ route('disciplinas.create') }}" class="quick-card">
+            <div class="quick-icon">
+                <i class="fa-solid fa-file-circle-plus"></i>
+            </div>
+
+            <div>
+                <strong>Nova Disciplina</strong>
+                <small>Cadastrar disciplina</small>
+            </div>
+        </a>
+    </div>
+
+    {{-- NOVO UTILIZADOR --}}
+    <div class="col-xl-3 col-md-6">
+        <a href="{{ route('usuarios.create') }}" class="quick-card">
+            <div class="quick-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <div>
+                <strong>Novo Utilizador</strong>
+                <small>Criar utilizador</small>
+            </div>
+        </a>
+    </div>
+
+</div>    {{-- RESUMO DO SISTEMA --}}
     <div class="dashboard-section">
 
         <div class="section-header">
