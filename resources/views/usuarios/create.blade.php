@@ -25,7 +25,7 @@
     }
 
     .signup-header {
-        background: #003B73;
+        background: #6C3CE9;
         color: #fff;
         padding: 26px 30px;
     }
@@ -82,7 +82,7 @@
     .form-control:focus,
     .form-select:focus {
         outline: none;
-        border-color: #003B73;
+        border-color: #6C3CE9;
         box-shadow: 0 0 0 3px rgba(0, 59, 115, 0.12);
     }
 
@@ -103,7 +103,7 @@
         width: 100%;
         margin-top: 16px;
         border: none;
-        background: #F57C00;
+        background: #9B6DFF;
         color: #fff;
         padding: 14px 18px;
         border-radius: 10px;
@@ -112,7 +112,7 @@
     }
 
     .btn-submit:hover {
-        background: #e66f00;
+        background: #4C1FB8;
     }
 
     .login-link {
@@ -123,7 +123,7 @@
     }
 
     .login-link a {
-        color: #003B73;
+        color: #6C3CE9;
         font-weight: 600;
         text-decoration: none;
     }

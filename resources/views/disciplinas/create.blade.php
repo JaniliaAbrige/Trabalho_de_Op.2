@@ -4,9 +4,9 @@
 
 <style>
     :root {
-        --azul-principal: #003B73;
-        --laranja: #F57C00;
-        --fundo: #f8fafc;
+        --azul-principal: #6C3CE9;
+        --laranja: #9B6DFF;
+        --fundo: #F8F7FC;
         --texto: #1f2937;
         --cinza: #6b7280;
         --borda: #e5e7eb;

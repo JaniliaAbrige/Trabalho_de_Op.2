@@ -586,6 +586,12 @@
     transition: .2s ease;
 }
 
+.premium-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
 .premium-card:hover {
     box-shadow: 0 16px 30px rgba(76,31,184,.08);
     transform: translateY(-3px);
@@ -1123,7 +1129,7 @@
 
             <div class="courses-row">
 
-                <div class="course-card">
+                <div class="course-card" role="link" tabindex="0" onclick="window.location.href='{{ route('signup') }}'" onkeydown="if (event.key === 'Enter' || event.key === ' ') window.location.href='{{ route('signup') }}'">
                     <div class="course-icon" style="background:#DD0031;"><i class="fab fa-angular"></i></div>
                     <h3>Angular Development</h3>
                     <div class="course-instructors">
@@ -1134,7 +1140,7 @@
                     </div>
                 </div>
 
-                <div class="course-card">
+                <div class="course-card" role="link" tabindex="0" onclick="window.location.href='{{ route('signup') }}'" onkeydown="if (event.key === 'Enter' || event.key === ' ') window.location.href='{{ route('signup') }}'">
                     <div class="course-icon" style="background:#3776AB;"><i class="fab fa-python"></i></div>
                     <h3>Python Development</h3>
                     <div class="course-instructors">
@@ -1145,7 +1151,7 @@
                     </div>
                 </div>
 
-                <div class="course-card">
+                <div class="course-card" role="link" tabindex="0" onclick="window.location.href='{{ route('signup') }}'" onkeydown="if (event.key === 'Enter' || event.key === ' ') window.location.href='{{ route('signup') }}'">
                     <div class="course-icon" style="background:#339933;"><i class="fab fa-node-js"></i></div>
                     <h3>NodeJS Development</h3>
                     <div class="course-instructors">
@@ -1156,7 +1162,7 @@
                     </div>
                 </div>
 
-                <div class="course-card">
+                <div class="course-card" role="link" tabindex="0" onclick="window.location.href='{{ route('signup') }}'" onkeydown="if (event.key === 'Enter' || event.key === ' ') window.location.href='{{ route('signup') }}'">
                     <div class="course-icon" style="background:#777BB4;"><i class="fab fa-php"></i></div>
                     <h3>PHP Development</h3>
                     <div class="course-instructors">
@@ -1167,7 +1173,7 @@
                     </div>
                 </div>
 
-                <div class="course-card">
+                <div class="course-card" role="link" tabindex="0" onclick="window.location.href='{{ route('signup') }}'" onkeydown="if (event.key === 'Enter' || event.key === ' ') window.location.href='{{ route('signup') }}'">
                     <div class="course-icon" style="background:#FF2D20;"><i class="fab fa-laravel"></i></div>
                     <h3>Laravel Development</h3>
                     <div class="course-instructors">
@@ -1195,90 +1201,46 @@
         <div class="container">
             <div class="courses-heading">
                 <h2>Cursos no plano premium</h2>
-                <a href="">Ver todos <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('cursos.index') }}">Ver todos <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="premium-grid">
-                <div class="premium-card">
-                    <div class="premium-thumb">
-                        <img src="{{ asset('imgs/course-figma.jpg') }}" alt="Figma UI/UX Design">
-                        <span class="premium-badge">Front-end</span>
-                    </div>
-                    <div class="premium-body">
-                        <h3>Figma UI/UX Design</h3>
-                        <div class="premium-meta">
-                            <div class="premium-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
-                            </div>
-                            <div class="premium-author">
-                                <img src="{{ asset('imgs/instructor1.jpg') }}" alt="Instrutor">
-                                <span>Angela Yu</span>
-                            </div>
+                @forelse($cursosPremium as $curso)
+                    <a href="{{ route('signup') }}" class="premium-card premium-card-link">
+                        <div class="premium-thumb">
+                            <img
+                                src="{{ $curso->capa ? asset('storage/' . $curso->capa) : asset('Imgs/graduada.png') }}"
+                                alt="Capa do curso {{ $curso->nome }}"
+                            >
+                            <span class="premium-badge">
+                                {{ $curso->categoria?->nome ?? 'Curso premium' }}
+                            </span>
                         </div>
-                        <div class="premium-footer">
-                            <span class="premium-price">1500 MTs</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="premium-card">
-                    <div class="premium-thumb">
-                        <img src="{{ asset('imgs/course-react.jpg') }}" alt="Learn With React">
-                        <span class="premium-badge">Front-end</span>
-                    </div>
-                    <div class="premium-body">
-                        <h3>Learn With React</h3>
-                        <div class="premium-meta">
-                            <div class="premium-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>(5.0)</span>
+                        <div class="premium-body">
+                            <h3>{{ $curso->nome }}</h3>
+                            <div class="premium-meta">
+                                <div class="premium-rating">
+                                    <i class="fas fa-book-open"></i>
+                                    <span>{{ ucfirst($curso->modalidade) }}</span>
+                                </div>
+                                <div class="premium-author">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>{{ $curso->duracao ?: 'Formação profissional' }}</span>
+                                </div>
                             </div>
-                            <div class="premium-author">
-                                <img src="{{ asset('imgs/instructor2.jpg') }}" alt="Instrutor">
-                                <span>Brad Traversy</span>
+                            <div class="premium-footer">
+                                <span class="premium-price">
+                                    {{ number_format((float) $curso->preco, 2, ',', '.') }} MTs
+                                </span>
                             </div>
                         </div>
-                        <div class="premium-footer">
-                            <span class="premium-price">1250 MTs</span>
-                        </div>
+                    </a>
+                @empty
+                    <div class="premium-empty">
+                        <i class="fas fa-book-open"></i>
+                        <p>Ainda não existem cursos premium cadastrados.</p>
                     </div>
-                </div>
-
-                <div class="premium-card">
-                    <div class="premium-thumb">
-                        <img src="{{ asset('imgs/course-ui.jpg') }}" alt="Building User Interface">
-                        <span class="premium-badge">Design</span>
-                    </div>
-                    <div class="premium-body">
-                        <h3>Building User Interface</h3>
-                        <div class="premium-meta">
-                            <div class="premium-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>(4.0)</span>
-                            </div>
-                            <div class="premium-author">
-                                <img src="{{ asset('imgs/instructor3.jpg') }}" alt="Instrutor">
-                                <span>John Doe</span>
-                            </div>
-                        </div>
-                        <div class="premium-footer">
-                            <span class="premium-price">2200 MTs</span>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
 
             <div class="courses-dots">

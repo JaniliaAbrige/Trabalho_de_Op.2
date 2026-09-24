@@ -6,9 +6,9 @@
 
 <style>
     :root {
-        --azul-principal: #003B73;
-        --laranja: #F57C00;
-        --fundo: #f8fafc;
+        --azul-principal: #6C3CE9;
+        --laranja: #9B6DFF;
+        --fundo: #F8F7FC;
         --borda: #e5e7eb;
         --texto: #1f2937;
         --cinza: #6b7280;
@@ -149,6 +149,31 @@
     .form-select:focus {
         border-color: var(--azul-principal);
         box-shadow: 0 0 0 3px rgba(0, 59, 115, .08);
+    }
+
+    .password-field {
+        position: relative;
+    }
+
+    .password-field .form-control {
+        padding-right: 45px;
+    }
+
+    .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        transform: translateY(-50%);
+        border: 0;
+        background: transparent;
+        color: var(--cinza);
+        cursor: pointer;
+    }
+
+    .password-toggle:hover {
+        color: var(--azul-principal);
     }
 
     textarea.form-control {
@@ -499,15 +524,16 @@
                                 <span class="required">*</span>
                             </label>
 
-                            <input
-                                type="text"
+                            <select
                                 name="documento_identificacao"
                                 id="documento_identificacao"
-                                value="{{ old('documento_identificacao') }}"
-                                class="form-control @error('documento_identificacao') is-invalid @enderror"
-                                placeholder="BI, Passaporte, etc."
+                                class="form-select @error('documento_identificacao') is-invalid @enderror"
                                 required
                             >
+                                <option value="">Selecione o documento</option>
+                                <option value="BI" {{ old('documento_identificacao') === 'BI' ? 'selected' : '' }}>BI</option>
+                                <option value="Passaporte" {{ old('documento_identificacao') === 'Passaporte' ? 'selected' : '' }}>Passaporte</option>
+                            </select>
 
                             @error('documento_identificacao')
                                 <div class="invalid-feedback">
@@ -566,44 +592,19 @@
                                 <span class="required">*</span>
                             </label>
 
-                            <input
-                                type="text"
+                            <select
                                 name="provincia"
                                 id="provincia"
-                                value="{{ old('provincia') }}"
-                                class="form-control @error('provincia') is-invalid @enderror"
-                                placeholder="Ex.: Maputo"
+                                class="form-select @error('provincia') is-invalid @enderror"
                                 required
                             >
+                                <option value="">Selecione a província</option>
+                                @foreach(['Cabo Delgado', 'Gaza', 'Inhambane', 'Manica', 'Maputo', 'Nampula', 'Niassa', 'Sofala', 'Tete', 'Zambézia', 'Cidade de Maputo'] as $provincia)
+                                    <option value="{{ $provincia }}" {{ old('provincia') === $provincia ? 'selected' : '' }}>{{ $provincia }}</option>
+                                @endforeach
+                            </select>
 
                             @error('provincia')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                        </div>
-
-
-                        {{-- DISTRITO --}}
-                        <div class="col-md-6">
-
-                            <label for="distrito" class="form-label">
-                                Distrito
-                                <span class="required">*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                name="distrito"
-                                id="distrito"
-                                value="{{ old('distrito') }}"
-                                class="form-control @error('distrito') is-invalid @enderror"
-                                placeholder="Ex.: KaMpfumo"
-                                required
-                            >
-
-                            @error('distrito')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -754,14 +755,19 @@
                                 <span class="required">*</span>
                             </label>
 
-                            <input
-                                type="password"
-                                name="senha"
-                                id="senha"
-                                class="form-control @error('senha') is-invalid @enderror"
-                                placeholder="Digite a senha"
-                                required
-                            >
+                            <div class="password-field">
+                                <input
+                                    type="password"
+                                    name="senha"
+                                    id="senha"
+                                    class="form-control @error('senha') is-invalid @enderror"
+                                    placeholder="Digite a senha"
+                                    required
+                                >
+                                <button type="button" class="password-toggle" data-target="senha" aria-label="Mostrar senha">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
 
                             <div class="password-note">
                                 A senha deve ter pelo menos 6 caracteres.
@@ -784,14 +790,19 @@
                                 <span class="required">*</span>
                             </label>
 
-                            <input
-                                type="password"
-                                name="senha_confirmation"
-                                id="senha_confirmation"
-                                class="form-control"
-                                placeholder="Repita a senha"
-                                required
-                            >
+                            <div class="password-field">
+                                <input
+                                    type="password"
+                                    name="senha_confirmation"
+                                    id="senha_confirmation"
+                                    class="form-control"
+                                    placeholder="Repita a senha"
+                                    required
+                                >
+                                <button type="button" class="password-toggle" data-target="senha_confirmation" aria-label="Mostrar confirmação da senha">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
 
                         </div>
 
@@ -831,6 +842,21 @@
     </div>
 
 </div>
+
+<script>
+    document.querySelectorAll('.password-toggle').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const input = document.getElementById(button.dataset.target);
+            const icon = button.querySelector('i');
+            const visible = input.type === 'text';
+
+            input.type = visible ? 'password' : 'text';
+            icon.classList.toggle('fa-eye', visible);
+            icon.classList.toggle('fa-eye-slash', !visible);
+            button.setAttribute('aria-label', visible ? 'Mostrar senha' : 'Ocultar senha');
+        });
+    });
+</script>
 
 @endsection
 

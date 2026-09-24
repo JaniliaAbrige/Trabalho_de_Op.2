@@ -61,7 +61,7 @@ public function store(Request $request)
 
         'provincia' => 'required|string|max:100',
 
-        'distrito' => 'required|string|max:100',
+        'distrito' => 'nullable|string|max:100',
 
         'endereco' => 'nullable|string|max:255',
 
@@ -192,7 +192,7 @@ public function store(Request $request)
 
             'provincia' => $validated['provincia'],
 
-            'distrito' => $validated['distrito'],
+            'distrito' => $validated['distrito'] ?? null,
 
             'endereco' => $validated['endereco'] ?? null,
 

@@ -4,7 +4,7 @@
 
 <style>
     .dashboard-page {
-        background: #f6f8fb;
+        background: #F8F7FC;
         min-height: calc(100vh - 70px);
         padding: 30px;
     }
@@ -19,7 +19,7 @@
     .dashboard-title h2 {
         margin: 0;
         font-weight: 700;
-        color: #003B73;
+        color: #6C3CE9;
     }
 
     .dashboard-title p {
@@ -35,7 +35,7 @@
         border: 1px solid #e5e7eb;
         padding: 10px 16px;
         border-radius: 10px;
-        color: #003B73;
+        color: #6C3CE9;
         font-weight: 600;
     }
 
@@ -50,7 +50,7 @@
 
     .stat-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 24px rgba(0, 59, 115, .08);
+        box-shadow: 0 8px 24px rgba(108, 60, 233, .10);
     }
 
     .stat-top {
@@ -66,8 +66,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #eaf2fb;
-        color: #003B73;
+        background: #F1ECFE;
+        color: #6C3CE9;
         font-size: 20px;
     }
 
@@ -100,7 +100,7 @@
 
     .section-header h5 {
         margin: 0;
-        color: #003B73;
+        color: #6C3CE9;
         font-weight: 700;
     }
 
@@ -119,8 +119,8 @@
     }
 
     .quick-card:hover {
-        border-color: #003B73;
-        background: #f8fbff;
+        border-color: #6C3CE9;
+        background: #FAF8FF;
         transform: translateY(-2px);
     }
 
@@ -129,8 +129,8 @@
         height: 42px;
         min-width: 42px;
         border-radius: 10px;
-        background: #eaf2fb;
-        color: #003B73;
+        background: #F1ECFE;
+        color: #6C3CE9;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -146,7 +146,7 @@
     }
 
     .welcome-card {
-        background: #003B73;
+        background: linear-gradient(135deg, #6C3CE9, #9B6DFF);
         color: #fff;
         border-radius: 16px;
         padding: 25px;

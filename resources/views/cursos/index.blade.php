@@ -6,7 +6,7 @@
 
 <style>
     .curso-page {
-        background: #f8fafc;
+        background: #F8F7FC;
         min-height: calc(100vh - 140px);
         padding: 35px 0 50px;
     }
@@ -20,7 +20,7 @@
     }
 
     .page-header h1 {
-        color: #003B73;
+        color: #1F2333;
         font-size: 26px;
         font-weight: 700;
         margin: 0;
@@ -34,7 +34,7 @@
 
     .btn-novo {
         border: none;
-        background: #F57C00;
+        background: #9B6DFF;
         color: #fff;
         border-radius: 7px;
         padding: 10px 18px;
@@ -50,7 +50,8 @@
     }
 
     .btn-novo:hover {
-        background: #003B73;
+        background: #000;
+        border-color: #000;
         color: #fff;
     }
 
@@ -74,7 +75,7 @@
         height: 42px;
         min-width: 42px;
         border-radius: 8px;
-        background: #003B73;
+        background: linear-gradient(135deg, #6C3CE9, #9B6DFF);
         color: #fff;
         display: flex;
         align-items: center;
@@ -83,7 +84,7 @@
     }
 
     .card-title-area h2 {
-        color: #003B73;
+        color: #1F2333;
         font-size: 18px;
         font-weight: 700;
         margin: 0;
@@ -106,7 +107,7 @@
     }
 
     .curso-table thead th {
-        background: #f8fafc;
+        background: #F1ECFE;
         color: #374151;
         font-size: 12px;
         font-weight: 700;
@@ -143,7 +144,7 @@
     }
 
     .curso-nome {
-        color: #003B73;
+        color: #6C3CE9;
         font-weight: 700;
         line-height: 1.4;
     }
@@ -159,8 +160,8 @@
         align-items: center;
         padding: 5px 9px;
         border-radius: 6px;
-        background: #eff6ff;
-        color: #003B73;
+        background: #F1ECFE;
+        color: #6C3CE9;
         font-size: 11px;
         font-weight: 600;
         white-space: nowrap;
@@ -223,27 +224,27 @@
     }
 
     .btn-acao:hover {
-        border-color: #003B73;
-        color: #003B73;
-        background: #f8fafc;
+        border-color: #000;
+        color: #fff;
+        background: #000;
     }
 
     .btn-ativar:hover {
-        border-color: #047857;
-        color: #047857;
-        background: #ecfdf5;
+        border-color: #000;
+        color: #fff;
+        background: #000;
     }
 
     .btn-desativar:hover {
-        border-color: #F57C00;
-        color: #F57C00;
-        background: #fff7ed;
+        border-color: #000;
+        color: #fff;
+        background: #000;
     }
 
     .btn-eliminar:hover {
-        border-color: #dc2626;
-        color: #dc2626;
-        background: #fef2f2;
+        border-color: #000;
+        color: #fff;
+        background: #000;
     }
 
     .alert-success {
@@ -263,8 +264,8 @@
         height: 55px;
         margin: 0 auto 15px;
         border-radius: 10px;
-        background: #f1f5f9;
-        color: #003B73;
+        background: #F1ECFE;
+        color: #6C3CE9;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -272,7 +273,7 @@
     }
 
     .empty-state h3 {
-        color: #003B73;
+        color: #6C3CE9;
         font-size: 16px;
         font-weight: 700;
         margin-bottom: 6px;
@@ -315,7 +316,7 @@
     }
 
     .mobile-course-name {
-        color: #003B73;
+        color: #6C3CE9;
         font-size: 14px;
         font-weight: 700;
         line-height: 1.4;
@@ -335,7 +336,7 @@
     }
 
     .info-item {
-        background: #f8fafc;
+        background: #FAF8FF;
         border: 1px solid #eef0f3;
         border-radius: 7px;
         padding: 9px;

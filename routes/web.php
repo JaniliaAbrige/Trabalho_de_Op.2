@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EstudanteController;
 use App\Http\Controllers\InscricaoController;
 use App\Http\Controllers\DisciplinaController;
+use App\Models\Curso;
 
 
 /*
@@ -18,7 +19,17 @@ use App\Http\Controllers\DisciplinaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $cursosPremium = Curso::with('categoria')
+        ->where('estado', 'aberto')
+        ->where(function ($query) {
+            $query->where('gratis', false)
+                ->orWhereNull('gratis');
+        })
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return view('welcome', compact('cursosPremium'));
 })->name('inicio');
 
 
@@ -325,3 +336,22 @@ Route::get('/docente/dashboard', function () {
 Route::get('/estudante/dashboard', function () {
     return view('estudantes.dashboard');
 })->name('estudante.dashboard');
+
+Route::get('/estudantes/dashboard', function () {
+    return view('estudantes.dashboard');
+})->name('estudantes.dashboard');
+
+Route::get('/dashboard', function () {
+    $usuario = auth()->user();
+
+    if (!$usuario) {
+        return redirect()->route('inicio');
+    }
+
+    return match ($usuario->tipo) {
+        'admin' => redirect()->route('admin.dashboard'),
+        'docente' => redirect()->route('docente.dashboard'),
+        'estudante' => redirect()->route('estudantes.dashboard'),
+        default => redirect()->route('inicio'),
+    };
+})->name('dashboard');

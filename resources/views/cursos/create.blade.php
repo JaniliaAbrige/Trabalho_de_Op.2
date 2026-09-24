@@ -149,10 +149,11 @@
 
     .capa-upload {
         position: relative;
+        width: min(100%, 420px);
+        aspect-ratio: 1 / 1;
         border: 2px dashed #D9D1F7;
         border-radius: 12px;
         background: var(--sg-primary-light);
-        min-height: 190px;
 
         display: flex;
         flex-direction: column;
@@ -352,6 +353,31 @@
         gap: 8px;
     }
 
+    .materiais-opcao {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .materiais-opcao label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--sg-text);
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .materiais-opcao input {
+        accent-color: var(--sg-primary);
+    }
+
+    .materiais-conteudo.disabled {
+        opacity: .45;
+        pointer-events: none;
+    }
+
     .material-item {
         display: flex;
         align-items: center;
@@ -490,7 +516,7 @@
                                 <div id="capa-placeholder">
                                     <div class="capa-upload-text">
                                         <strong>Clique para carregar a imagem de capa</strong>
-                                        <span>PNG ou JPG, até 2MB</span>
+                                        <span>PNG ou JPG quadrado, até 2MB</span>
                                     </div>
                                 </div>
                             </label>
@@ -765,18 +791,40 @@
                         Materiais e videoaula
                     </div>
 
+                    <div class="materiais-opcao" role="radiogroup" aria-label="Necessidade de materiais">
+                        <label>
+                            <input
+                                type="radio"
+                                name="materiais_opcao"
+                                value="necessarios"
+                                {{ old('materiais_opcao', 'necessarios') === 'necessarios' ? 'checked' : '' }}
+                            >
+                            Materiais necessários
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="materiais_opcao"
+                                id="materiais_nao_necessarios"
+                                value="nao_necessarios"
+                                {{ old('materiais_opcao') === 'nao_necessarios' ? 'checked' : '' }}
+                            >
+                            Não é necessário
+                        </label>
+                    </div>
+
                     <div class="row g-3">
 
-                        <div class="col-12">
+                        <div class="col-12 materiais-conteudo" id="materiais-conteudo">
                             <label class="form-label">
                                 Documentos e vídeos do curso <span class="form-text">(opcional)</span>
                             </label>
 
                             <div class="materiais-upload" id="materiais-upload">
-                                <input type="file" name="documentos[]" id="documentos" accept=".pdf,video/*" multiple>
+                                <input type="file" name="documentos[]" id="documentos" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,video/*" multiple>
 
-                                <strong>Clique para carregar PDFs ou vídeos</strong>
-                                <span>Pode selecionar vários ficheiros — PDF, MP4, MOV</span>
+                                <strong>Clique para carregar documentos ou vídeos</strong>
+                                <span>Pode selecionar vários ficheiros — PDF, DOCX, PPTX, XLSX, MP4, MOV</span>
                             </div>
 
                             <div id="lista-materiais"></div>
@@ -953,7 +1001,7 @@
 
 <script>
 
-    // Pré-visualização da capa
+    // Pré-visualização e recorte quadrado da capa
     (function () {
         const input = document.getElementById('capa');
         const preview = document.getElementById('capa-preview');
@@ -964,9 +1012,32 @@
                 const reader = new FileReader();
 
                 reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                    placeholder.style.display = 'none';
+                    const image = new Image();
+
+                    image.onload = function () {
+                        const side = Math.min(image.naturalWidth, image.naturalHeight);
+                        const canvas = document.createElement('canvas');
+                        const context = canvas.getContext('2d');
+                        const offsetX = (image.naturalWidth - side) / 2;
+                        const offsetY = (image.naturalHeight - side) / 2;
+
+                        canvas.width = side;
+                        canvas.height = side;
+                        context.drawImage(image, offsetX, offsetY, side, side, 0, 0, side, side);
+
+                        preview.src = canvas.toDataURL('image/jpeg', 0.9);
+                        preview.style.display = 'block';
+                        placeholder.style.display = 'none';
+
+                        canvas.toBlob(function (blob) {
+                            const croppedFile = new File([blob], 'capa-quadrada.jpg', { type: 'image/jpeg' });
+                            const transfer = new DataTransfer();
+                            transfer.items.add(croppedFile);
+                            input.files = transfer.files;
+                        }, 'image/jpeg', 0.9);
+                    };
+
+                    image.src = e.target.result;
                 };
 
                 reader.readAsDataURL(this.files[0]);
@@ -1001,9 +1072,25 @@
         const lista = document.getElementById('lista-materiais');
 
         input.addEventListener('change', function () {
+            const ficheirosAtuais = Array.from(input.files);
+            const ficheirosAnteriores = input._ficheirosSelecionados || [];
+            const ficheiros = [...ficheirosAnteriores, ...ficheirosAtuais];
+            const unicos = ficheiros.filter(function (file, index, todos) {
+                return index === todos.findIndex(function (item) {
+                    return item.name === file.name && item.size === file.size && item.lastModified === file.lastModified;
+                });
+            });
+
+            input._ficheirosSelecionados = unicos;
+
+            const transfer = new DataTransfer();
+            unicos.forEach(function (file) {
+                transfer.items.add(file);
+            });
+            input.files = transfer.files;
             lista.innerHTML = '';
 
-            Array.from(this.files).forEach(function (file) {
+            Array.from(input.files).forEach(function (file) {
                 const item = document.createElement('div');
                 item.className = 'material-item';
                 item.textContent = file.name;
@@ -1011,6 +1098,35 @@
                 lista.appendChild(item);
             });
         });
+    })();
+
+    // Desativa materiais e videoaula quando não forem necessários.
+    (function () {
+        const modalidade = document.getElementById('modalidade');
+        const opcaoMateriais = document.querySelectorAll('input[name="materiais_opcao"]');
+        const semMateriais = document.getElementById('materiais_nao_necessarios');
+        const conteudo = document.getElementById('materiais-conteudo');
+        const documentos = document.getElementById('documentos');
+        const linkAula = document.getElementById('link_aula');
+
+        function atualizarMateriais() {
+            const presencial = modalidade.value === 'Presencial';
+
+            if (presencial) {
+                semMateriais.checked = true;
+            }
+
+            const desativado = presencial || semMateriais.checked;
+            conteudo.classList.toggle('disabled', desativado);
+            documentos.disabled = desativado;
+            linkAula.disabled = desativado;
+        }
+
+        modalidade.addEventListener('change', atualizarMateriais);
+        opcaoMateriais.forEach(function (opcao) {
+            opcao.addEventListener('change', atualizarMateriais);
+        });
+        atualizarMateriais();
     })();
 
 </script>

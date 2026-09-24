@@ -112,8 +112,9 @@ class CursoController extends Controller
             'capa' => ['nullable', 'image', 'max:2048'],
             'gratis' => ['nullable', 'boolean'],
             'documentos' => ['nullable', 'array'],
-            'documentos.*' => ['file', 'mimes:pdf,mp4,mov,avi,webm', 'max:51200'],
+            'documentos.*' => ['file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx,mp4,mov,avi,webm', 'max:51200'],
             'link_aula' => ['nullable', 'url', 'max:255'],
+            'materiais_opcao' => ['nullable', 'in:necessarios,nao_necessarios'],
         ], [
             'categoria_id.required' => 'Selecione uma categoria.',
             'categoria_id.exists' => 'A categoria selecionada não existe.',
@@ -252,7 +253,7 @@ class CursoController extends Controller
             'capa' => ['nullable', 'image', 'max:2048'],
             'gratis' => ['nullable', 'boolean'],
             'documentos' => ['nullable', 'array'],
-            'documentos.*' => ['file', 'mimes:pdf,mp4,mov,avi,webm', 'max:51200'],
+            'documentos.*' => ['file', 'mimes:pdf,doc,docx,ppt,pptx,xls,xlsx,mp4,mov,avi,webm', 'max:51200'],
             'link_aula' => ['nullable', 'url', 'max:255'],
         ]);
 
@@ -315,6 +316,12 @@ class CursoController extends Controller
 
         $validated['estado'] = $validated['estado'] === '1' ? 'aberto' : 'fechado';
         $validated['gratis'] = $request->boolean('gratis');
+
+        if ($request->input('modalidade') === 'Presencial' || $request->input('materiais_opcao') === 'nao_necessarios') {
+            unset($validated['documentos'], $validated['link_aula'], $validated['materiais_opcao']);
+        } else {
+            unset($validated['materiais_opcao']);
+        }
 
         if ($validated['gratis']) {
             $validated['preco'] = 0;

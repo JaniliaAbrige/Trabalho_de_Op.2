@@ -1,6 +1,6 @@
 <style>
 .sg-footer {
-    background: #1F1B33;
+    background: #1d005f;
     color: rgba(255,255,255,.7);
     padding: 60px 0 24px;
     font-family: var(--sg-font-body, 'Inter', sans-serif);

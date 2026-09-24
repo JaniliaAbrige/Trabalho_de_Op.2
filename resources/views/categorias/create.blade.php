@@ -6,7 +6,7 @@
 
 <style>
     .categoria-page {
-        background: #f8fafc;
+        background: #F8F7FC;
         min-height: calc(100vh - 140px);
         padding: 35px 0 50px;
     }
@@ -16,7 +16,7 @@
     }
 
     .page-header h1 {
-        color: #003B73;
+        color: #1F2333;
         font-size: 26px;
         font-weight: 700;
         margin: 0;
@@ -47,7 +47,7 @@
         width: 42px;
         height: 42px;
         border-radius: 8px;
-        background: #003B73;
+        background: linear-gradient(135deg, #6C3CE9, #9B6DFF);
         color: #fff;
         display: flex;
         align-items: center;
@@ -56,7 +56,7 @@
     }
 
     .card-title-area h2 {
-        color: #003B73;
+        color: #1F2333;
         font-size: 18px;
         font-weight: 700;
         margin: 0;
@@ -73,12 +73,12 @@
     }
 
     .section-title {
-        color: #003B73;
+        color: #6C3CE9;
         font-size: 15px;
         font-weight: 700;
         margin-bottom: 18px;
         padding-bottom: 10px;
-        border-bottom: 2px solid #F57C00;
+        border-bottom: 2px solid #6C3CE9;
     }
 
     .form-label {
@@ -98,8 +98,8 @@
 
     .form-control:focus,
     .form-select:focus {
-        border-color: #003B73;
-        box-shadow: 0 0 0 3px rgba(0, 59, 115, .08);
+        border-color: #6C3CE9;
+        box-shadow: 0 0 0 3px rgba(108, 60, 233, .10);
     }
 
     textarea.form-control {
@@ -108,7 +108,7 @@
     }
 
     .required {
-        color: #F57C00;
+        color: #6C3CE9;
     }
 
     .form-text {
@@ -143,13 +143,13 @@
     }
 
     .btn-cancelar:hover {
-        background: #f8fafc;
-        color: #003B73;
+        background: #000;
+        color: #fff;
     }
 
     .btn-registar {
         border: none;
-        background: #F57C00;
+        background: #9B6DFF;
         color: #fff;
         border-radius: 7px;
         padding: 10px 20px;
@@ -158,7 +158,7 @@
     }
 
     .btn-registar:hover {
-        background: #003B73;
+        background: #000;
         color: #fff;
     }
 

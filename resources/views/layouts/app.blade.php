@@ -54,8 +54,8 @@
 
         :root {
 
-            --azul: #003B73;
-            --laranja: #F57C00;
+            --azul: #6C3CE9;
+            --laranja: #9B6DFF;
             --branco: #FFFFFF;
 
         }
@@ -80,9 +80,9 @@
             display: flex;
             flex-direction: column;
 
-            background: #FFFFFF;
+            background: #F8F7FC;
 
-            color: #003B73;
+            color: #1F2333;
 
             font-family: 'Inter', sans-serif;
 
@@ -115,8 +115,8 @@
 
         .btn-primary-custom {
 
-            background: #003B73;
-            border: 1px solid #003B73;
+            background: #6C3CE9;
+            border: 1px solid #6C3CE9;
 
             color: #FFFFFF;
 
@@ -133,8 +133,8 @@
 
         .btn-primary-custom:hover {
 
-            background: #F57C00;
-            border-color: #F57C00;
+            background: #4C1FB8;
+            border-color: #4C1FB8;
 
             color: #FFFFFF;
 
@@ -149,8 +149,8 @@
 
         .btn-orange {
 
-            background: #F57C00;
-            border: 1px solid #F57C00;
+            background: #9B6DFF;
+            border: 1px solid #9B6DFF;
 
             color: #FFFFFF;
 
@@ -167,8 +167,8 @@
 
         .btn-orange:hover {
 
-            background: #003B73;
-            border-color: #003B73;
+            background: #6C3CE9;
+            border-color: #6C3CE9;
 
             color: #FFFFFF;
 
@@ -183,12 +183,12 @@
 
             background: #FFFFFF;
 
-            border: 1px solid rgba(0, 59, 115, 0.10);
+            border: 1px solid rgba(108, 60, 233, 0.12);
 
             border-radius: 12px;
 
             box-shadow:
-                0 4px 15px rgba(0, 59, 115, 0.05);
+                0 4px 15px rgba(108, 60, 233, 0.08);
 
         }
 
@@ -199,11 +199,11 @@
 
         .alert-system {
 
-            border: 1px solid rgba(0, 59, 115, 0.10);
+            border: 1px solid rgba(108, 60, 233, 0.12);
 
             border-radius: 9px;
 
-            color: #003B73;
+            color: #1F2333;
 
             background: #FFFFFF;
 
@@ -216,7 +216,7 @@
 
         ::selection {
 
-            background: #F57C00;
+            background: #6C3CE9;
             color: #FFFFFF;
 
         }
@@ -235,12 +235,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #003B73;
+            background: #6C3CE9;
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #F57C00;
+            background: #9B6DFF;
         }
 
 
@@ -260,6 +260,78 @@
 
 
     @stack('styles')
+
+    <style>
+        .dashboard-page,
+        .categoria-page,
+        .curso-page,
+        .signup-page {
+            background: #F8F7FC !important;
+        }
+
+        .dashboard-title h2,
+        .admin-badge,
+        .section-header h5,
+        .quick-icon,
+        .page-header h1,
+        .card-title-area h2,
+        .section-title,
+        .login-link a {
+            color: #6C3CE9 !important;
+        }
+
+        .stat-icon,
+        .quick-icon {
+            background: #F1ECFE !important;
+        }
+
+        .quick-card:hover,
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #6C3CE9 !important;
+        }
+
+        .quick-card:hover {
+            background: #FAF8FF !important;
+        }
+
+        .title-icon,
+        .signup-header {
+            background: linear-gradient(135deg, #6C3CE9, #9B6DFF) !important;
+        }
+
+        .section-title {
+            border-bottom-color: #6C3CE9 !important;
+        }
+
+        .required,
+        .btn-registar,
+        .btn-submit {
+            background-color: #9B6DFF !important;
+            border-color: #9B6DFF !important;
+        }
+
+        .required {
+            background-color: transparent !important;
+            color: #6C3CE9 !important;
+        }
+
+        .btn-registar:hover,
+        .btn-submit:hover {
+            background-color: #4C1FB8 !important;
+            border-color: #4C1FB8 !important;
+        }
+
+        button:hover:not(.password-toggle),
+        input[type="submit"]:hover,
+        input[type="button"]:hover,
+        a[class*="btn-"]:hover {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            border-color: #000000 !important;
+            color: #FFFFFF !important;
+        }
+    </style>
 
 </head>
 
